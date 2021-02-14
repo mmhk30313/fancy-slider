@@ -39,7 +39,7 @@ const getImages = (query) => {
       // showImages(data.hitS) // Incorrect
       document.getElementById("wrong-duration").style.display = "none";
       if(data.hits.length === 0){
-
+        gallery.innerHTML = '';
         document.getElementById('not-found').innerHTML = `Image not found for <span class="text-danger">${query}</span>`;
       }
       else{
