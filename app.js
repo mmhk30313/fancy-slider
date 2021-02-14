@@ -38,7 +38,14 @@ const getImages = (query) => {
       // console.log(data);
       // showImages(data.hitS) // Incorrect
       document.getElementById("wrong-duration").style.display = "none";
-      showImages(data.hits)
+      if(data.hits.length === 0){
+
+        document.getElementById('not-found').innerHTML = `Image not found for <span class="text-danger">${query}</span>`;
+      }
+      else{
+        document.getElementById('not-found').innerHTML = "";
+        showImages(data.hits)
+      }
     })
     .catch(err => console.log(err))
 }
