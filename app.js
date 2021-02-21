@@ -42,6 +42,8 @@ const spinToggler = (show)=>{
   else{
     spinner.classList.add('d-none');
   }
+  // Replacement for above code...
+  // spinner.classList.toggle('d-none');
 }
 const getImages = (query) => {
   // console.log(query);
