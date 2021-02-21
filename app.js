@@ -4,6 +4,8 @@ const galleryHeader = document.querySelector('.gallery-header');
 const searchBtn = document.getElementById('search-btn');
 const sliderBtn = document.getElementById('create-slider');
 const sliderContainer = document.getElementById('sliders');
+const spinner = document.getElementById('spinner-loader');
+
 // selected image 
 let sliders = [];
 
@@ -27,20 +29,34 @@ const showImages = (images) => {
     div.innerHTML = ` <img class="img-fluid img-thumbnail" onclick=selectItem(event,"${image.webformatURL}") src="${image.webformatURL}" alt="${image.tags}">`;
     gallery.appendChild(div)
   })
-
+  spinToggler(false);
 }
 
+// SpinToggler Function....
+const spinToggler = (show)=>{
+  // console.log(show);
+  // console.log(spinner.classList)
+  if(show){
+    spinner.classList.remove('d-none');
+  }
+  else{
+    spinner.classList.add('d-none');
+  }
+}
 const getImages = (query) => {
   // console.log(query);
+  spinToggler(true);
   fetch(`https://pixabay.com/api/?key=${KEY}=${query}&image_type=photo&pretty=true`)
     .then(response => response.json())
     .then(data => {
       // console.log(data);
       // showImages(data.hitS) // Incorrect
+      
       document.getElementById("wrong-duration").style.display = "none";
       if(data.hits.length === 0){
         gallery.innerHTML = '';
         document.getElementById('not-found').innerHTML = `Image not found for <span class="text-danger">${query}</span>`;
+        spinToggler(false);
       }
       else{
         document.getElementById('not-found').innerHTML = "";
@@ -48,6 +64,7 @@ const getImages = (query) => {
       }
     })
     .catch(err => console.log(err))
+    
 }
 
 let slideIndex = 0;
