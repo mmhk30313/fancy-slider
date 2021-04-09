@@ -69,6 +69,8 @@ const getImages = (query) => {
     
 }
 
+getImages("")
+
 let slideIndex = 0;
 const selectItem = (event, img) => {
   let element = event.target;
